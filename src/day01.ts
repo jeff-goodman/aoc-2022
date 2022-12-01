@@ -18,8 +18,7 @@ function getElves(): number[] {
 
     const elves: number[] = [];
     input.split('\n\n').map(e => {
-        let total = 0;
-        e.split('\n').forEach(c => total += +c);
+        const total = e.split('\n').reduce((a, b) => a + +b, 0);
         elves.push(total);
     });
 
