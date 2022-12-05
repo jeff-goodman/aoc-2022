@@ -25,8 +25,9 @@ const loseRule: Rule = Object.fromEntries(
     Object.entries(winRule).map(a => a.reverse())
 );
 
+const guide = getInput();
+
 export function partA(): number {
-    const guide = getInput();
     let score = 0;
     guide.map(pair => {
         const p1 = playValue[pair[0]];
@@ -37,7 +38,6 @@ export function partA(): number {
 }
 
 export function partB(): number {
-    const guide = getInput();
     let score = 0;
     guide.map((pair: string[]) => {
         const p1 = playValue[pair[0]];

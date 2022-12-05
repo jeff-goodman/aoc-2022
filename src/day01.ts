@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 
+const elves = getElves();
+
 export function partA(): number {
-    const elves = getElves();
     return Math.max(...elves)
 }
 
 export function partB(): number {
-    const elves = getElves();
     elves.sort((a, b) => b - a);
     const top3 = elves.slice(0, 3);
     return (top3.reduce((a, b) => a + b, 0));
