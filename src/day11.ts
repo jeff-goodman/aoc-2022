@@ -10,16 +10,6 @@ interface Monkey {
     count: number;
 }
 
-interface MonkeyModulo {
-    items: number[][];
-    operatorMethod: string;
-    operatorValue: number | string;
-    testValue: number;
-    onTrue: number;
-    onFalse: number;
-    count: number;
-}
-
 const input = getInput();
 const monkeyData = input.split('\n\n').map(m => m.split('\n'));
 
@@ -65,65 +55,34 @@ export function partA() {
 
 export function partB() {
     const divisor = Number.MAX_SAFE_INTEGER;
-    const monkeyStart = getStartingMonkeys(monkeyData)
-    const monkeys: MonkeyModulo[] = monkeyStart.map(m => {
-        return {
-            ...m,
-            items: m.items.map(i => {
-                const it: number[] = [];
-                for(let n = 0; n < monkeyStart.length; n++) {
-                    let newValue = i;
-                    while (newValue % monkeyStart[n].testValue === 0) {
-                        newValue /= monkeyStart[n].testValue
-                    }
-                    it.push(newValue)
-                }
-                return it;
-            }),
-        }
-    });
+    const monkeys = getStartingMonkeys(monkeyData);
+    const modulo = monkeys.reduce((mod, monkey) => mod * monkey.testValue, 1)
 
     // 32446636740 is too high
     // console.dir({monkeys}, {depth: null});
-    for(let round = 1; round <= 20; round++) {
+    for(let round = 1; round <= 10000; round++) {
         for(let m = 0; m < monkeys.length; m++) {
             const len = monkeys[m].items.length;
             for(let i = 0; i < len; i++) {
                 let [worry] = monkeys[m].items.splice(0, 1);
                 monkeys[m].count++;
-                let value: number[];
-                value = monkeys.map((monkey, ind) => {
-                    if(monkey.operatorValue === 'old') {
-                        return worry[ind];
-                    } else {
-                        return +monkey.operatorValue;
-                    }
-                });
-
-                console.log({ round, i, value, worry });
+                let value: number;
+                if(monkeys[m].operatorValue === 'old') {
+                    value = worry;
+                } else {
+                    value = Number(monkeys[m].operatorValue);
+                }
                 switch(monkeys[m].operatorMethod) {
                     case '+':
-                        worry = worry.map((w, ind) => {
-                            let newValuePlus = w + value[ind];
-                            while (newValuePlus % monkeys[ind].testValue === 0) {
-                                newValuePlus /= monkeys[ind].testValue;
-                            }
-                            return newValuePlus;
-                        });
+                        worry += value;
                         break;
                     case '*':
-                        worry = worry.map((w, ind) => {
-                            let multiplier = value[ind];
-                            let newValueTimes = w * multiplier;
-                            while (newValueTimes % monkeys[ind].testValue === 0) {
-                                newValueTimes /= monkeys[ind].testValue;
-                            }
-                            return newValueTimes;
-                        });
+                        worry *= value;
+                        worry = worry % modulo;
                         break;
                 }
                 let throwTo: number;
-                if(worry[m] % monkeys[m].testValue === 0) {
+                if(worry % monkeys[m].testValue === 0) {
                     throwTo = monkeys[m].onTrue;
                 } else {
                     throwTo = monkeys[m].onFalse;
