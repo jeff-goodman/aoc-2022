@@ -17,7 +17,6 @@ export function partB() {
         if(i % 40 === 0) {
             screen += '\n';
             hPos = 0;
-            console.log(i + ' ' + hPos)
         };
         if(val >= hPos-1 && val <= hPos+1) {
             screen += '#';
@@ -29,7 +28,6 @@ export function partB() {
     }, '');
     console.log(screen);
     return 0;
-
 }
 
 function getInput() {

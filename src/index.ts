@@ -7,6 +7,7 @@ import * as day06 from "./day06";
 import * as day07 from "./day07";
 import * as day08 from "./day08";
 import * as day10 from "./day10";
+import * as day11 from "./day11";
 
 const startTime = Date.now();
 console.log({
@@ -32,6 +33,8 @@ console.table({
     day08B: day08.partB(),
     day10A: day10.partA(),
     day10B: day10.partB(),
+    day11A: day11.partA(),
+    day11B: day11.partB(),
 });
 
 console.log({
