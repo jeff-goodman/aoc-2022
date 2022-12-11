@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 
 const input = getInput();
-const count = input.length * input[0].length;
+const number = input.length * input[0].length;
 
 export function partA() {
-    console.log({ count });
+    console.log({ number})
     return countGreaterNumbers(input);
 }
 
@@ -27,6 +27,10 @@ function countGreaterNumbers(grid: number[][]) {
     // Loop through each row and column of the grid
     for (let row = 0; row < grid.length; row++) {
       for (let col = 0; col < grid[row].length; col++) {
+        if(row === 0 || row === grid.length-1 || col === 0 || col === grid[row].length-1) {
+          count++;
+          continue;
+        }
         // Get the current number at the given row and column
         const currentNumber = grid[row][col];
 
