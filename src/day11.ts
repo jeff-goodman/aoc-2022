@@ -93,7 +93,7 @@ export function partB() {
     }
     const monkeyBusiness = monkeys.map(m => m.count);
     monkeyBusiness.sort((a, b) => b - a);
-    console.dir({monkeys}, {depth: null});
+    // console.dir({monkeys}, {depth: null});
 
     return monkeyBusiness[0] * monkeyBusiness[1];
 }
