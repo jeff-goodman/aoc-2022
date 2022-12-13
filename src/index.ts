@@ -1,13 +1,14 @@
-import * as day01 from "./day01";
-import * as day02 from "./day02";
-import * as day03 from "./day03";
-import * as day04 from "./day04";
-import * as day05 from "./day05";
-import * as day06 from "./day06";
-import * as day07 from "./day07";
-import * as day08 from "./day08";
-import * as day10 from "./day10";
-import * as day11 from "./day11";
+import * as day01 from './day01';
+import * as day02 from './day02';
+import * as day03 from './day03';
+import * as day04 from './day04';
+import * as day05 from './day05';
+import * as day06 from './day06';
+import * as day07 from './day07';
+import * as day08 from './day08';
+import * as day10 from './day10';
+import * as day11 from './day11';
+import * as day13 from './day13';
 
 const startTime = Date.now();
 console.log({
@@ -35,6 +36,8 @@ console.table({
     day10B: day10.partB(),
     day11A: day11.partA(),
     day11B: day11.partB(),
+    day13A: day13.partA(),
+    day13B: day13.partB(),
 });
 
 console.log({
